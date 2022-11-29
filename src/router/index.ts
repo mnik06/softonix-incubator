@@ -3,6 +3,7 @@ import Contacts from '@/views/Contacts.vue'
 import UpsertContact from '@/views/UpsertContact.vue'
 import { useContactsStore } from '@/store'
 import { storeToRefs } from 'pinia'
+import { examplesRoutes } from '@/views/examples/examples.routes'
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +30,8 @@ export const router = createRouter({
           next({ name: 'contacts' })
         }
       }
-    }
+    },
+
+    ...examplesRoutes
   ]
 })

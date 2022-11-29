@@ -4,3 +4,8 @@ export interface IContact {
   description: string
   image?: string
 }
+
+export interface ITableColumn {
+  value: string
+  label?: string
+}

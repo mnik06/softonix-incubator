@@ -12,7 +12,8 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest',
-    parser: '@typescript-eslint/parser'
+    parser: '@typescript-eslint/parser',
+    requireConfigFile: false
   },
 
   ignorePatterns: ['*.d.ts'],
@@ -92,5 +93,5 @@ module.exports = {
         prefix: ['E']
       }
     ]
-  }
+  },
 }
