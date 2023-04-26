@@ -1,34 +1,33 @@
 <template>
-  <div class="max-w-[1440px] mx-auto p-6">
+  <div class="min-h-screen min-w-screen">
     <RouterView #default="routeParams">
-      <Transition name="route" appear>
+      <transition name="route" mode="out-in">
+        <!-- <keep-alive> -->
         <component
           :is="routeParams.Component"
           :key="routeParams.route.name"
         />
-      </Transition>
+        <!-- </keep-alive> -->
+      </transition>
     </RouterView>
   </div>
 </template>
 
 <style lang="scss">
-.route-enter-from {
-  opacity: 0;
-  transform: translateY(-30px);
-}
+.route-enter-from,
 .route-leave-to {
   opacity: 0;
-  transform: translateY(30px);
+  transform: scale(.9);
 }
-.route-enter-active {
+
+.route-enter-active,
+.route-leave-active {
   transition: all 0.2s ease-out;
 }
-.route-leave-active {
-  transition: all 0.2s ease-in;
-}
+
 .route-enter-to,
 .route-leave-from {
   opacity: 1;
-  transform: translateY(0);
+  transform: scale(1);
 }
 </style>

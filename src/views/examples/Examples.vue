@@ -1,7 +1,12 @@
 <template>
   <div class="py-10 px-5">
-    <div class="flex flex-col">
-      <h2 class="mb-10 text-xl font-bold">Table Module with scoped slots and list refs:</h2>
+    <div class="flex items-center">
+      <router-link to="/route1" class="mr-5 underline text-red-500">Route 1</router-link>
+      <router-link to="/route2" class="underline text-red-500">Route 2</router-link>
+    </div>
+
+    <div class="flex flex-col mt-20">
+      <h2 class="mb-10 text-xl font-bold">Table Module with scoped slots:</h2>
 
       <button class="underline w-fit my-5" @click="changeDynamicTableSlot">
         Change dynamic slot
@@ -12,13 +17,14 @@
           Salary
           <button class="w-2" @click="sortBySalary ? sortBySalary = 0 : sortBySalary = 1">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-              <path d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"/>
+              <!-- eslint-disable-next-line -->
+              <path d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z" />
             </svg>
           </button>
         </template>
 
         <template #avatar="{ item }">
-          <img :src="item.image" alt="person image" class="w-7 h-7 rounded-full" />
+          <img :src="item.image" alt="person image" class="w-7 h-7 rounded-full">
         </template>
 
         <template #salary="{ item }">
@@ -33,48 +39,47 @@
       </TableModule>
     </div>
 
-
-    <div class="flex flex-col mt-10">
+    <div class="flex flex-col mt-20">
       <h2 class="mb-10 text-xl font-bold">Single Transitions:</h2>
 
       <div class="flex items-center h-[150px]">
         <button class="mr-10 rounded-md underline" @click="showScaleBlock = !showScaleBlock">Toggle block</button>
 
-        <Transition name="scale-transition">
+        <transition name="scale">
           <div v-if="showScaleBlock" class="w-[100px] h-[100px] bg-red-800 rounded-xl" />
-        </Transition>
+        </transition>
       </div>
 
       <div class="flex items-center h-[150px]">
         <button class="mr-10 rounded-md underline" @click="showFadeBlock = !showFadeBlock">Toggle block</button>
 
-        <Transition name="fade-transition">
+        <transition name="fade">
           <div v-if="showFadeBlock" class="w-[100px] h-[100px] bg-green-800 rounded-xl" />
-        </Transition>
+        </transition>
       </div>
 
       <div class="flex items-center h-[150px]">
         <button class="mr-10 underline" @click="showSlideBlock = !showSlideBlock">Toggle block</button>
 
-        <Transition name="slide-transition">
+        <transition name="slide">
           <div v-if="showSlideBlock" class="w-[100px] h-[100px] bg-blue-800 rounded-xl" />
-        </Transition>
+        </transition>
       </div>
     </div>
 
-    <div class="flex flex-col mt-10">
+    <div class="flex flex-col mt-20">
       <h2 class="mb-10 text-xl font-bold">Transition Groups:</h2>
 
       <div class="flex items-center h-[270px]">
-        <button 
-          class="mr-10 underline" 
+        <button
+          class="mr-10 underline"
           @click="transitionList.splice(Math.floor(Math.random() * transitionList.length), 1)"
         >
           Remove List Item
         </button>
 
-        <button 
-          class="mr-10 underline" 
+        <button
+          class="mr-10 underline"
           @click="transitionList.sort((a, b) => Math.random() * a - Math.random() * b)"
         >
           Shuffle List
@@ -82,10 +87,10 @@
 
         <ul ref="list">
           <TransitionGroup name="list-transition">
-            <li 
-              v-for="n of transitionList" 
-              :key="n" 
-              ref="listItem" 
+            <li
+              v-for="n of transitionList"
+              :key="n"
+              ref="listItem"
               class="text-lightBlue-600 font-bold transition-all duration-300"
             >
               List Item {{ n }}
@@ -95,7 +100,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col mt-10 h-[200px]">
+    <div class="flex flex-col mt-20 h-[200px]">
       <h2 class="mb-10 text-xl font-bold">Keep Alive:</h2>
 
       <div class="flex items-center">
@@ -110,7 +115,7 @@
 
           <Counter v-if="showCounter" class="mt-5" />
         </div>
-        
+
         <div class="flex flex-col flex-1 h-[130px]">
           <h3 class="font-semibold text-lg">
             With Keep Alive
@@ -120,14 +125,14 @@
             Toggle Visibility
           </button>
 
-          <KeepAlive>
+          <keep-alive>
             <Counter v-if="showCounterWithKA" class="mt-5" />
-          </KeepAlive>
+          </keep-alive>
         </div>
       </div>
     </div>
 
-    <div class="flex flex-col mt-10" v-if="false">
+    <div v-if="false" class="flex flex-col mt-20">
       <h2 class="mb-10 text-xl font-bold">Render Functions:</h2>
 
       <div class="space-y-3">
@@ -149,14 +154,15 @@
 </template>
 
 <script lang="ts" setup>
+/* eslint-disable */
 import { ref, computed, onMounted } from 'vue'
 
 import type { ITableColumn } from '@/types'
 import { divideNumberWithComa } from '@/core/helpers'
 
 import TableModule from '@/components/TableModule.vue'
-import Counter from '@/views/examples/Counter.vue'
-import DynamicHeading from '@/views/examples/DynamicHeading.vue'
+import Counter from '@/views/examples/components/Counter.vue'
+import DynamicHeading from '@/views/examples/components/DynamicHeading.vue'
 
 interface IPerson {
   name: string
@@ -168,9 +174,9 @@ interface IPerson {
 
 const tableItems: IPerson[] = [
   { name: 'Bob', age: 30, occupation: 'Developer', salary: 3000, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Steve_Jobs_Headshot_2010-CROP_%28cropped_2%29.jpg/800px-Steve_Jobs_Headshot_2010-CROP_%28cropped_2%29.jpg' },
-  { name: 'John', age: 25, occupation: 'Manager', salary: 2000, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Steve_Jobs_Headshot_2010-CROP_%28cropped_2%29.jpg/800px-Steve_Jobs_Headshot_2010-CROP_%28cropped_2%29.jpg' },
+  { name: 'John', age: 25, occupation: 'Manager', salary: 2000, image: 'https://static.vecteezy.com/system/resources/previews/002/002/403/original/man-with-beard-avatar-character-isolated-icon-free-vector.jpg' },
   { name: 'Linda', age: 20, occupation: 'Recruiter', salary: 4000, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Steve_Jobs_Headshot_2010-CROP_%28cropped_2%29.jpg/800px-Steve_Jobs_Headshot_2010-CROP_%28cropped_2%29.jpg' },
-  { name: 'Mary', age: 45, occupation: 'Devops', salary: 1500, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Steve_Jobs_Headshot_2010-CROP_%28cropped_2%29.jpg/800px-Steve_Jobs_Headshot_2010-CROP_%28cropped_2%29.jpg' }
+  { name: 'Mary', age: 45, occupation: 'Devops', salary: 1500, image: 'https://static.vecteezy.com/system/resources/previews/002/002/403/original/man-with-beard-avatar-character-isolated-icon-free-vector.jpg' }
 ]
 const tableColumns: ITableColumn[] = [
   {
@@ -193,7 +199,7 @@ const tableColumns: ITableColumn[] = [
     label: 'Salary'
   }
 ]
-const transitionList = ref<number[]>([1, 2, 3, 4, 5, 6 ,7, 8, 9, 10])
+const transitionList = ref<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
 const sortBySalary = ref<number | null>(null)
 const dynamicTableSlot = ref<string>('')
@@ -231,46 +237,46 @@ const sortedItems = computed<IPerson[]>(() => {
 
 <style lang="scss" scoped>
 // scale transition
-.scale-transition-enter-from,
-.scale-transition-leave-to {
+.scale-enter-from,
+.scale-leave-to {
   opacity: 0;
   transform: scale(0.3);
   transition: all .3s;
 }
 
-.scale-transition-enter-to,
-.scale-transition-leave-from {
+.scale-enter-to,
+.scale-leave-from {
   opacity: 1;
   transform: none;
   transition: all .3s;
 }
 
 // slide transition
-.slide-transition-enter-from,
-.slide-transition-leave-to {
+.slide-enter-from,
+.slide-leave-to {
   opacity: 0;
   transform: translateX(100px);
   transition: all .3s;
 }
 
-.slide-transition-enter-to,
-.slide-transition-leave-from {
+.slide-enter-to,
+.slide-leave-from {
   opacity: 1;
   transform: none;
   transition: all .3s;
 }
 
 // fade transition
-.fade-transition-enter-from,
-.fade-transition-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
-  transition: all .3s;
+  transition: all .2s;
 }
 
-.fade-transition-enter-to,
-.fade-transition-leave-from {
+.fade-enter-to,
+.fade-leave-from {
   opacity: 1;
-  transition: all .3s;
+  transition: all .2s;
 }
 
 // list transition

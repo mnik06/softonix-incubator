@@ -1,8 +1,8 @@
 <template>
   <div>
-    <button 
+    <button
       class="text-sm border-[1px] border-white rounded-md bg-blue-400 text-white px-5 py-2 font-semibold mr-5"
-      @click="counter++" 
+      @click="counter++"
     >
       Increase
     </button>
@@ -12,13 +12,14 @@
 </template>
 
 <script setup lang="ts">
-import { 
-  onActivated, 
-  onDeactivated, 
-  onMounted, 
-  onUnmounted, 
-  onUpdated, 
-  ref 
+/* eslint-disable */
+import {
+  onActivated,
+  onDeactivated,
+  onMounted,
+  onUnmounted,
+  onUpdated,
+  ref
 } from 'vue'
 
 const counter = ref<number>(0)
